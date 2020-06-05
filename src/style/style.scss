@@ -111,19 +111,16 @@ label {
    background-position-x: center; // keeps image centered, does not stretch it
    background-position-y: top; // always puts the image centered at the top
    background-repeat: no-repeat;
-   background-color: rgb(
-      200,
-      37,
-      37
-   ); // if the screen is taller than the image (such as small width screen with the form open), continue the background with flat black color so it looks like the image is just continuing
+   // background-color: #010b14; // if the screen is taller than the image (such as small width screen with the form open), continue the background with flat black color so it looks like the image is just continuing
    // height: 100vh;
    // background-size: auto 100%;
    // background: fixed;
-   height: 100vh;
+   // height: 100vh;
+   height: 1080px;
 }
 
 html {
-   background-color: rgb(200, 37, 37);
+   background-color: #010b14;
 }
 
 .app-contents {
@@ -154,9 +151,9 @@ html {
 //    background-position: center;
 // }
 
-.full-height {
-   height: 100vh;
-}
+// .full-height {
+//    height: 2000px;
+// }
 
 .red {
    background-color: red;

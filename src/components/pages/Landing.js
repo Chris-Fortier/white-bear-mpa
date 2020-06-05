@@ -1,9 +1,6 @@
 import React from "react";
-// import backgroundImage from "../../img/background-landing.jpg"; // thumbs up icon
 import landingLogo from "../../img/logo-landing.png"; // thumbs up icon
-
-// import Header from "../ui/Header";
-// import Navigation from "../ui/Navigation";
+import { Link } from "react-router-dom"; // a React element for linking
 
 export default function Landing() {
    return (
@@ -132,12 +129,13 @@ export default function Landing() {
                               password error
                            </div>
                         </div>
-                        <button
+                        <Link
                            className="btn btn-success float-right"
                            id="login-button"
+                           to="/create-answer"
                         >
                            Log in
-                        </button>
+                        </Link>
                      </form>
                   </div>
                </div>

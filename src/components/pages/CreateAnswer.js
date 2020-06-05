@@ -40,7 +40,7 @@ export default function CreateAnswer() {
             <div className="col">
                <div className="float-right">
                   <Link
-                     className="float-right btn btn-outline-primary btn-lg disabled"
+                     className="float-right btn btn-outline-primary btn-lg"
                      to="/create-imagery"
                      id="next-button"
                   >

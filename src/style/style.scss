@@ -120,20 +120,28 @@ label {
 }
 
 html {
+   /* set this so the divs that extend beyond the background image have a background color that matches the image */
    background-color: #010b14;
 }
 
-.app-contents {
-   background: white;
-   height: 100vh;
-}
-
-// Mike's version
 // .background-image {
+//    /* https://css-tricks.com/perfect-full-page-background-image/ */
 //    background: url("../img/background-landing.jpg") no-repeat center center
 //       fixed;
 //    background-size: cover;
 //    height: 100vh;
+// }
+
+.app-contents {
+   /* needed so the background color doesn't appear when the contents on the page stop */
+   height: 100vh;
+}
+
+// // Mike's version modified
+// .background-image {
+//    background: url("../img/background-landing.jpg") no-repeat center center; // removed fixed
+//    background-size: cover;
+//    height: 1080px; // changed from 100vh to auto to 1080px
 // }
 
 // .background-image {

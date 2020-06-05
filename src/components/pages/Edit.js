@@ -105,7 +105,7 @@ export default function Edit() {
          </div>
 
          {/* <!-- delete this card button --> */}
-         <div className="row mb-4 invisible" id="delete-button">
+         <div className="row mb-4" id="delete-button">
             <div className="col">
                <Link className="btn btn-outline-danger" to="/all-cards">
                   Delete this card

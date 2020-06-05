@@ -8,7 +8,7 @@ export default function Navigation() {
       // test if we are on the create tab, if so return the tab-active class
       if (
          url.indexOf("create-imagery") > 0 ||
-         url.indexOf("create-asnswer") > 0
+         url.indexOf("create-answer") > 0
       ) {
          return "tab-active";
       } else return "";
@@ -18,7 +18,7 @@ export default function Navigation() {
       // test if we are on the review tab, if so return the tab-active class
       if (
          url.indexOf("review-imagery") > 0 ||
-         url.indexOf("review-asnswer") > 0 ||
+         url.indexOf("review-answer") > 0 ||
          url.indexOf("review-empty") > 0
       ) {
          return "tab-active";

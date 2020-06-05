@@ -46,7 +46,8 @@ export default function CreateImagery() {
                >
                   Back to answer
                </Link>
-               <button
+               <Link
+                  to="/create-answer"
                   className="float-right btn btn-primary btn-lg"
                   id="save-imagery"
                >
@@ -60,7 +61,7 @@ export default function CreateImagery() {
                      alt=""
                   />
                   Save
-               </button>
+               </Link>
             </div>
          </div>
          {/* <!-- end of buttons --> */}

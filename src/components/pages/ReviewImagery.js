@@ -21,7 +21,9 @@ export default function ReviewImagery() {
 
          <div className="row mb-4">
             <div className="col">
-               <button className="btn btn-link">Previous card</button>
+               <Link to="/review-answer" className="btn btn-link">
+                  Previous card
+               </Link>
                <div className="float-right">
                   <Link
                      to="/review-answer"

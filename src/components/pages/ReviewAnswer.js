@@ -43,7 +43,7 @@ export default function ReviewAnswer() {
                   >
                      Needs work
                   </Link>
-                  <Link className="btn btn-primary" to="/review-empty">
+                  <Link className="btn btn-primary" to="/review-imagery">
                      <img
                         src={thumbsUpIcon}
                         width="20px"

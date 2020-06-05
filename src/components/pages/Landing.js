@@ -35,7 +35,7 @@ export default function Landing() {
                      <h2 className="card-title">Nice to meet you</h2>
                      <p>Sign up for White Bear. Free forever</p>
                      <form
-                        className="mb-0 d-none needs-validation"
+                        className="mb-0 needs-validation"
                         id="sign-up-form"
                         noValidate
                      >
@@ -50,10 +50,7 @@ export default function Landing() {
                               id="new-email-input"
                               required
                            />
-                           <div
-                              className="d-none text-danger"
-                              id="new-email-error"
-                           >
+                           <div className="text-danger" id="new-email-error">
                               email error
                            </div>
                         </div>
@@ -67,10 +64,7 @@ export default function Landing() {
                               id="new-password-input"
                               required
                            />
-                           <div
-                              className="d-none text-danger"
-                              id="new-password-error"
-                           >
+                           <div className="text-danger" id="new-password-error">
                               password error
                            </div>
                         </div>
@@ -81,12 +75,13 @@ export default function Landing() {
                            Let's Go
                         </button>
                      </form>
-                     <button
+                     <Link
+                        to="/create-answer"
                         className="btn btn-success float-right"
                         id="sign-up-button"
                      >
                         Sign up
-                     </button>
+                     </Link>
                   </div>
                </div>
                <div className="offset-1 col-10 offset-sm-2 col-sm-8 offset-md-1 col-md-4 offset-lg-1 col-lg-3 offset-xl-1 col-xl-3">
@@ -106,7 +101,7 @@ export default function Landing() {
                               required
                            />
                            <div
-                              className="d-none text-danger"
+                              className="text-danger"
                               id="existing-email-error"
                            >
                               email error
@@ -123,7 +118,7 @@ export default function Landing() {
                               required
                            />
                            <div
-                              className="d-none text-danger"
+                              className="text-danger"
                               id="existing-password-error"
                            >
                               password error

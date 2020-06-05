@@ -1,16 +1,10 @@
 import React from "react";
-import Header from "../ui/Header";
-import Navigation from "../ui/Navigation";
 import AppTemplate from "../ui/AppTemplate";
 import { Link } from "react-router-dom"; // a React element for linking
 
 export default function ReviewEmpty() {
    return (
       <AppTemplate>
-         <Header />
-
-         <Navigation />
-
          <h4>Out of cards</h4>
 
          {/* <!-- button row --> */}

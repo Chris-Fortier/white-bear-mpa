@@ -1,15 +1,10 @@
 import React from "react";
-import Header from "../ui/Header";
-import Navigation from "../ui/Navigation";
 import AppTemplate from "../ui/AppTemplate";
 import { Link } from "react-router-dom"; // a React element for linking
 
 export default function Edit() {
    return (
       <AppTemplate>
-         <Header />
-         <Navigation />
-
          <h4>Edit card</h4>
 
          <div className="mb-2">

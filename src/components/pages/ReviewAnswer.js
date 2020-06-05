@@ -1,17 +1,11 @@
 import React from "react";
 import thumbsUpIcon from "../../icons/thumbs-up.svg"; // thumbs up icon
-import Header from "../ui/Header";
-import Navigation from "../ui/Navigation";
 import AppTemplate from "../ui/AppTemplate";
 import { Link } from "react-router-dom"; // a React element for linking
 
 export default function ReviewAnswer() {
    return (
       <AppTemplate>
-         <Header />
-
-         <Navigation />
-
          {/* <!-- Header ends here --> */}
 
          <div className="mb-5">

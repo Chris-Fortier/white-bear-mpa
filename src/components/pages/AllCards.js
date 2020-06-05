@@ -1,17 +1,11 @@
 import React from "react";
 import editIcon from "../../icons/edit.svg"; // thumbs up icon
-import Header from "../ui/Header";
-import Navigation from "../ui/Navigation";
 import AppTemplate from "../ui/AppTemplate";
 import { Link } from "react-router-dom"; // a React element for linking
 
 export default function AllCards() {
    return (
       <AppTemplate>
-         <Header />
-
-         <Navigation />
-
          {/* <!-- form stuff --> */}
          <form className="row mb-0">
             <div className="form-group col-8">

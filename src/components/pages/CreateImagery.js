@@ -1,15 +1,11 @@
 import React from "react";
 import saveIcon from "../../icons/save.svg"; // thumbs up icon
-import Header from "../ui/Header";
-import Navigation from "../ui/Navigation";
 import AppTemplate from "../ui/AppTemplate";
 import { Link } from "react-router-dom"; // a React element for linking
 
 export default function CreateImagery() {
    return (
       <AppTemplate>
-         <Header />
-         <Navigation />
          <h4>Add Memorable Imagery</h4>
          <div className="mb-2">
             <div className="card bg-primary">

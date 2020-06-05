@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"; // a React element for linking
 
 export default function Landing() {
    return (
-      <div className="background-image h-100">
+      <div className="background-image">
          <div className="container-fluid landing-page">
             {/* <!-- logo and title --> */}
             <div className="row mb-8 pt-7">

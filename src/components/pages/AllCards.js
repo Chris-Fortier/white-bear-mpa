@@ -1,7 +1,8 @@
 import React from "react";
-import editIcon from "../../icons/edit.svg"; // thumbs up icon
 import AppTemplate from "../ui/AppTemplate";
-import { Link } from "react-router-dom"; // a React element for linking
+import MemoryCard from "../ui/MemoryCard";
+import memoryCards from "../../mock-data/memory-cards";
+// const memoryCard = memoryCards[2];
 
 export default function AllCards() {
    return (
@@ -48,81 +49,15 @@ export default function AllCards() {
             </div>
          </form>
 
-         {/* <!-- one card --> */}
-         <div className="row mb-5">
-            <div className="col-9 col-sm-10">
-               <div className="card bg-primary">
-                  <div className="card-body allcards">
-                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                     Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                     natoque penatibus et magnis dis parturient montes, nascetur
-                     ridiculus mus. Donec quam felis, ultricies nec,
-                     pellentesque eu, pretium quis, sem. Nulla consequat massa
-                  </div>
-               </div>
-               <div className="card bg-secondary">
-                  <div className="card-body allcards">
-                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                     Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                     natoque penatibus et magnis dis parturient montes, nascetur
-                     ridiculus mus. Donec quam felis, ultricies nec,
-                     pellentesque eu, pretium quis, sem. Nulla consequat massa
-                  </div>
-               </div>
-            </div>
-            <div className="col-3 col-sm-2">
-               <Link className="btn btn-link float-right" to="/edit">
-                  <img
-                     src={editIcon}
-                     width="20px"
-                     style={{
-                        marginBottom: "5px",
-                        marginRight: "8px",
-                     }}
-                     alt=""
-                  />
-                  Edit
-               </Link>
-            </div>
-         </div>
-
-         {/* <!-- one card --> */}
-         <div className="row mb-5">
-            <div className="col-9 col-sm-10">
-               <div className="card bg-primary">
-                  <div className="card-body allcards">
-                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                     Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                     natoque penatibus et magnis dis parturient montes, nascetur
-                     ridiculus mus. Donec quam felis, ultricies nec,
-                     pellentesque eu, pretium quis, sem. Nulla consequat massa
-                  </div>
-               </div>
-               <div className="card bg-secondary">
-                  <div className="card-body allcards">
-                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                     Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                     natoque penatibus et magnis dis parturient montes, nascetur
-                     ridiculus mus. Donec quam felis, ultricies nec,
-                     pellentesque eu, pretium quis, sem. Nulla consequat massa
-                  </div>
-               </div>
-            </div>
-            <div className="col-3 col-sm-2">
-               <Link className="btn btn-link float-right" to="/edit">
-                  <img
-                     src={editIcon}
-                     width="20px"
-                     style={{
-                        marginBottom: "5px",
-                        marginRight: "8px",
-                     }}
-                     alt=""
-                  />
-                  Edit
-               </Link>
-            </div>
-         </div>
+         {memoryCards.map((memoryCard) => {
+            return (
+               <MemoryCard
+                  answer={memoryCard.answer}
+                  imagery={memoryCard.imagery}
+                  key={memoryCard.id}
+               />
+            );
+         })}
       </AppTemplate>
    );
 }

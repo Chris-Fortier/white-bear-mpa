@@ -2,6 +2,9 @@ import React from "react";
 import thumbsUpIcon from "../../icons/thumbs-up.svg"; // thumbs up icon
 import AppTemplate from "../ui/AppTemplate";
 import { Link } from "react-router-dom"; // a React element for linking
+import memoryCards from "../../mock-data/memory-cards";
+
+const memoryCard = memoryCards[2];
 
 export default function ReviewAnswer() {
    return (
@@ -10,22 +13,10 @@ export default function ReviewAnswer() {
 
          <div className="mb-5">
             <div className="card bg-primary">
-               <div className="card-body">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                  Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                  natoque penatibus et magnis dis parturient montes, nascetur
-                  ridiculus mus. Donec quam felis, ultricies nec, pellentesque
-                  eu, pretium quis, sem. Nulla consequat massa
-               </div>
+               <div className="card-body">{memoryCard.imagery}</div>
             </div>
             <div className="card bg-secondary">
-               <div className="card-body">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                  Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                  natoque penatibus et magnis dis parturient montes, nascetur
-                  ridiculus mus. Donec quam felis, ultricies nec, pellentesque
-                  eu, pretium quis, sem. Nulla consequat massa
-               </div>
+               <div className="card-body">{memoryCard.answer}</div>
             </div>
          </div>
 

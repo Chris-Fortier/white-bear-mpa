@@ -4,8 +4,8 @@ const memoryCardSchema = {
    answer: String,
    userId: String,
    createdAt: Number,
-   nextAttempt: Number,
+   nextAttemptAt: Number,
    lastAttemptAt: Number,
-   totalSuccessfulAttemps: Number,
+   totalSuccessfulAttempts: Number,
    level: Number,
 };

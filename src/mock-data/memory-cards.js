@@ -20,7 +20,7 @@ const memoryCards = [
       createdAt: 1587358805000,
       nextAttemptAt: 1589328000000,
       lastAttemptAt: 1589228000000,
-      totalSuccessfulAttempts: 2,
+      totalSuccessfulAttempts: 0,
       level: 1,
    },
    {
@@ -32,7 +32,7 @@ const memoryCards = [
       createdAt: 1587359328000,
       nextAttemptAt: 1589612703000,
       lastAttemptAt: 1589582703000,
-      totalSuccessfulAttempts: 1,
+      totalSuccessfulAttempts: 5,
       level: 2,
    },
    {
@@ -45,7 +45,7 @@ const memoryCards = [
       createdAt: 1587359456000,
       nextAttemptAt: 1590645901000,
       lastAttemptAt: 1590620337000,
-      totalSuccessfulAttempts: 3,
+      totalSuccessfulAttempts: 4,
       level: 2,
    },
 ];

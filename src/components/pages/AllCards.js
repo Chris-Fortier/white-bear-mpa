@@ -2,25 +2,46 @@ import React from "react";
 import AppTemplate from "../ui/AppTemplate";
 import MemoryCard from "../ui/MemoryCard";
 import memoryCards from "../../mock-data/memory-cards";
+import orderBy from "lodash/orderBy";
 // const memoryCard = memoryCards[2];
 
 export default class AllCards extends React.Component {
    constructor(props) {
       super(props);
-      this.state = {};
+      this.state = {
+         order: '["createdAt"], ["desc"]',
+         // order: [['createdAt'], ['desc']],
+         memoryCards: orderBy(memoryCards, ["createdAt"], ["desc"]),
+      };
 
-      // EASY
-      // orderBy([totalSuccessfulAttempts, createdAt], [desc, desc])
+      /*
 
-      // HARD
-      // orderBy([totalSuccessfulAttempts, createdAt], [asc, asc])
+      EASY
+      orderBy([totalSuccessfulAttempts, createdAt], [desc, desc])
 
-      // MOST RECENT
-      // orderBy([createdAt], [desc])
+      HARD
+      orderBy([totalSuccessfulAttempts, createdAt], [asc, asc])
 
-      // OLDEST
-      // orderBy([createdAt], [asc])
+      MOST RECENT
+      orderBy([createdAt], [desc])
+
+      OLDEST
+      orderBy([createdAt], [asc])
+
+      */
    }
+
+   // changes the order of the memory cards
+   setMemoryCardsOrder(e) {
+      console.log("You've made a change.");
+      const newOrder = e.target.value;
+      console.log(newOrder);
+      const copyOfMemoryCards = [...this.state.memoryCards];
+      const toJson = JSON.parse(newOrder);
+      const orderedMemoryCards = orderBy(copyOfMemoryCards, ...toJson);
+      this.setState({ order: newOrder, memoryCards: orderedMemoryCards });
+   }
+
    render() {
       return (
          <AppTemplate>
@@ -53,20 +74,27 @@ export default class AllCards extends React.Component {
                <div className="form-group col-8">
                   <div className="dropdown">
                      <select
-                        id="cars"
+                        value={this.state.order}
                         className="float-right btn dropdown-toggle btn-block"
                         style={{ height: "36px" }}
+                        onChange={(e) => this.setMemoryCardsOrder(e)}
                      >
-                        <option value="volvo">Most recent</option>
-                        <option value="saab">Oldest</option>
-                        <option value="mercedes">Hardest</option>
-                        <option value="audi">Easiest</option>
+                        <option value='[["createdAt"], ["desc"]]'>
+                           Most recent
+                        </option>
+                        <option value='[["createdAt"], ["asc"]]'>Oldest</option>
+                        <option value='[["totalSuccessfulAttempts", "createdAt"], ["asc", "asc"]]'>
+                           Hardest
+                        </option>
+                        <option value='[["totalSuccessfulAttempts", "createdAt"], ["desc", "desc"]]'>
+                           Easiest
+                        </option>
                      </select>
                   </div>
                </div>
             </form>
 
-            {memoryCards.map((memoryCard) => {
+            {this.state.memoryCards.map((memoryCard) => {
                return (
                   <MemoryCard
                      answer={memoryCard.answer}

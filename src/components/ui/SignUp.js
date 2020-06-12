@@ -1,6 +1,8 @@
 import React from "react";
 // import { Link } from "react-router-dom"; // a React element for linking
 import classnames from "classnames";
+import hash from "object-hash";
+import { v4 as getUuid } from "uuid";
 
 export default class SignUp extends React.Component {
    constructor(props) {
@@ -15,13 +17,15 @@ export default class SignUp extends React.Component {
       };
    }
 
+   // shows the for for signing up
    showInputs() {
       this.setState({
          isDisplayingInputs: true,
       });
    }
 
-   setEmailState(emailInput) {
+   // tests if the email is valid
+   async setEmailState(emailInput) {
       const lowerCasedEmailInput = emailInput.toLowerCase();
 
       // eslint-disable-next-line
@@ -42,6 +46,7 @@ export default class SignUp extends React.Component {
       }
    }
 
+   // tests if the local part of the email is inside the password
    checkHasLocalPart(passwordInput, emailInput) {
       if (emailInput.length < 4) {
          return false;
@@ -51,7 +56,8 @@ export default class SignUp extends React.Component {
       }
    }
 
-   setPasswordState(passwordInput, emailInput) {
+   // checks if the password is valid
+   async setPasswordState(passwordInput, emailInput) {
       console.log(passwordInput);
 
       const uniqChars = [...new Set(passwordInput)];
@@ -87,16 +93,27 @@ export default class SignUp extends React.Component {
       }
    }
 
-   validateAndCreateUser() {
+   // tests if the email and password are valid and if so creates the user
+   async validateAndCreateUser() {
       const emailInput = document.getElementById("email-input").value;
       const passwordInput = document.getElementById("password-input").value;
-      this.setEmailState(emailInput);
-      this.setPasswordState(passwordInput, emailInput);
+
+      // await is used on these to make sure we get the states of these before the if statement
+      await this.setEmailState(emailInput);
+      await this.setPasswordState(passwordInput, emailInput);
+
       if (!this.state.hasEmailError && !this.state.hasPasswordError) {
-         console.log("Valid!");
+         const user = {
+            id: getUuid(),
+            email: emailInput,
+            password: hash(passwordInput),
+            createdAt: Date.now(),
+         };
+         console.log(user);
       }
    }
 
+   // renders the signup faceplate
    render() {
       return (
          <div className="offset-1 col-10 offset-sm-2 col-sm-8 offset-md-1 col-md-4 offset-lg-2 col-lg-3 offset-xl-2 col-xl-3">

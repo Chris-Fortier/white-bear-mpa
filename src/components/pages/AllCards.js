@@ -42,8 +42,8 @@ export default function AllCards() {
                   >
                      <option value="volvo">Most recent</option>
                      <option value="saab">Oldest</option>
-                     <option value="mercedes">Hardest</option>
-                     <option value="audi">Easiest</option>
+                     {/* <option value="mercedes">Hardest</option>
+                     <option value="audi">Easiest</option> */}
                   </select>
                </div>
             </div>

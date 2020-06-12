@@ -11,6 +11,7 @@ export default class SignUp extends React.Component {
          emailError: "",
          passwordError: "",
          hasEmailError: false,
+         hasPasswordError: false,
       };
    }
 
@@ -20,8 +21,7 @@ export default class SignUp extends React.Component {
       });
    }
 
-   validateAndCreateUser() {
-      const emailInput = document.getElementById("email-input").value;
+   setEmailState(emailInput) {
       const lowerCasedEmailInput = emailInput.toLowerCase();
 
       // eslint-disable-next-line
@@ -39,6 +39,61 @@ export default class SignUp extends React.Component {
          });
       } else {
          this.setState({ emailError: "", hasEmailError: false });
+      }
+   }
+
+   checkHasLocalPart(passwordInput, emailInput) {
+      if (emailInput.length < 4) {
+         return false;
+      } else {
+         const localPart = emailInput.split("@")[0];
+         return passwordInput.includes(localPart);
+      }
+   }
+
+   setPasswordState(passwordInput, emailInput) {
+      console.log(passwordInput);
+
+      const uniqChars = [...new Set(passwordInput)];
+      console.log("uniqChars", uniqChars);
+
+      if (passwordInput === "") {
+         // check if password input is blank
+         this.setState({
+            passwordError: "Please create a password.",
+            hasPasswordError: true,
+         });
+      } else if (passwordInput.length < 9) {
+         // check if password is less than 9 characters
+         this.setState({
+            passwordError: "Your password must be at least 9 characters.",
+            hasPasswordError: true,
+         });
+      } else if (this.checkHasLocalPart(passwordInput, emailInput)) {
+         // check if the local part of email is in the password
+         this.setState({
+            passwordError: "Your password cannot contain your email address.",
+            hasPasswordError: true,
+         });
+      } else if (uniqChars.length < 3) {
+         // check if the password has less than 3 unique characters
+         this.setState({
+            passwordError:
+               "Your password must have at least three unique characters.",
+            hasPasswordError: true,
+         });
+      } else {
+         this.setState({ passwordError: "", hasPasswordError: false });
+      }
+   }
+
+   validateAndCreateUser() {
+      const emailInput = document.getElementById("email-input").value;
+      const passwordInput = document.getElementById("password-input").value;
+      this.setEmailState(emailInput);
+      this.setPasswordState(passwordInput, emailInput);
+      if (!this.state.hasEmailError && !this.state.hasPasswordError) {
+         console.log("Valid!");
       }
    }
 
@@ -81,11 +136,14 @@ export default class SignUp extends React.Component {
                            </label>
                            <input
                               type="password"
-                              className="form-control"
+                              className={classnames({
+                                 "form-control": true,
+                                 "is-invalid": this.state.hasPasswordError,
+                              })}
                               id="password-input"
                               required
                            />
-                           {this.state.passwordError !== "" && (
+                           {this.state.hasPasswordError && (
                               <div className="text-danger" id="password-error">
                                  {this.state.passwordError}
                               </div>

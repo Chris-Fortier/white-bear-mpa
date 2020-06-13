@@ -74,56 +74,54 @@ class LogIn extends React.Component {
 
    render() {
       return (
-         <div className="offset-1 col-10 offset-sm-2 col-sm-8 offset-md-1 col-md-4 offset-lg-1 col-lg-3 offset-xl-1 col-xl-3">
-            <div className="card">
-               <h2 className="card-title">Welcome back</h2>
-               <p>Log in with your email address and password.</p>
+         <div className="card">
+            <h2 className="card-title">Welcome back</h2>
+            <p>Log in with your email address and password.</p>
 
-               <form className="mb-0 needs-validation" noValidate>
-                  <div className="form-group">
-                     <label htmlFor="exampleInputEmail1">Email address</label>
-                     <input
-                        type="email"
-                        className={classnames({
-                           "form-control": true,
-                           "is-invalid": this.state.hasEmailError,
-                        })}
-                        id="email-input"
-                        required
-                     />
-                     {this.state.hasEmailError && (
-                        <div className="text-danger" id="email-error">
-                           {this.state.emailError}
-                        </div>
-                     )}
-                  </div>
-                  <div className="form-group">
-                     <label htmlFor="exampleInputPassword1">Password</label>
-                     <input
-                        type="password"
-                        className={classnames({
-                           "form-control": true,
-                           "is-invalid": this.state.hasPasswordError,
-                        })}
-                        id="password-input"
-                        required
-                     />
-                     {this.state.hasPasswordError && (
-                        <div className="text-danger" id="password-error">
-                           {this.state.passwordError}
-                        </div>
-                     )}
-                  </div>
-                  <button
-                     className="btn btn-success w-100"
-                     id="user-button"
-                     type="button"
-                     onClick={() => this.validateAndCreateUser()}
-                  >
-                     Log In
-                  </button>
-               </form>
-            </div>
+            <form className="mb-0 needs-validation" noValidate>
+               <div className="form-group">
+                  <label htmlFor="exampleInputEmail1">Email address</label>
+                  <input
+                     type="email"
+                     className={classnames({
+                        "form-control": true,
+                        "is-invalid": this.state.hasEmailError,
+                     })}
+                     id="email-input"
+                     required
+                  />
+                  {this.state.hasEmailError && (
+                     <div className="text-danger" id="email-error">
+                        {this.state.emailError}
+                     </div>
+                  )}
+               </div>
+               <div className="form-group">
+                  <label htmlFor="exampleInputPassword1">Password</label>
+                  <input
+                     type="password"
+                     className={classnames({
+                        "form-control": true,
+                        "is-invalid": this.state.hasPasswordError,
+                     })}
+                     id="password-input"
+                     required
+                  />
+                  {this.state.hasPasswordError && (
+                     <div className="text-danger" id="password-error">
+                        {this.state.passwordError}
+                     </div>
+                  )}
+               </div>
+               <button
+                  className="btn btn-success w-100"
+                  id="user-button"
+                  type="button"
+                  onClick={() => this.validateAndCreateUser()}
+               >
+                  Log In
+               </button>
+            </form>
          </div>
       );
    }

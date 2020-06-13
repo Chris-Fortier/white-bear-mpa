@@ -30,8 +30,12 @@ export default function Landing() {
 
             {/* <!-- cards --> */}
             <div className="row">
-               <SignUp />
-               <LogIn />
+               <div className="offset-1 col-10 offset-sm-2 col-sm-8 offset-md-1 col-md-5 offset-lg-1 col-lg-4 offset-xl-1 col-xl-4">
+                  <SignUp />
+               </div>
+               <div className="offset-1 col-10 offset-sm-2 col-sm-8 offset-md-0 col-md-5 offset-lg-1 col-lg-4 offset-xl-2 col-xl-4">
+                  <LogIn />
+               </div>
             </div>
          </div>
       </div>

@@ -4,7 +4,8 @@ import { Link } from "react-router-dom"; // a React element for linking
 import memoryCards from "../../mock-data/memory-cards";
 import toDisplayData from "date-fns/format";
 import classnames from "classnames";
-import { checkIsOver, MAX_CARD_CHARS } from "../../utils/helpers"; // use {} if its not importing the default export
+import { MAX_CARD_CHARS } from "../../utils/helpers"; // use {} if its not importing the default export
+import Counter from "../ui/Counter";
 
 const memoryCard = memoryCards[2];
 
@@ -74,28 +75,16 @@ export default class Edit extends React.Component {
 
             <div className="float-right mb-5 text-muted">
                <p>
-                  <span
-                     className={classnames({
-                        "text-danger": checkIsOver(
-                           this.state.imageryText,
-                           MAX_CARD_CHARS
-                        ),
-                     })}
-                  >
-                     Top:&nbsp;{this.state.imageryText.length}/{MAX_CARD_CHARS}
-                     &nbsp;
-                  </span>
-                  <span
-                     className={classnames({
-                        "text-danger": checkIsOver(
-                           this.state.answerText,
-                           MAX_CARD_CHARS
-                        ),
-                     })}
-                  >
-                     Bottom:&nbsp;{this.state.answerText.length}/
-                     {MAX_CARD_CHARS}
-                  </span>
+                  Top:&nbsp;
+                  <Counter
+                     count={this.state.imageryText.length}
+                     max={MAX_CARD_CHARS}
+                  />
+                  &nbsp;&nbsp;&nbsp;Bottom:&nbsp;
+                  <Counter
+                     count={this.state.answerText.length}
+                     max={MAX_CARD_CHARS}
+                  />
                </p>
             </div>
             <div className="clearfix"></div>

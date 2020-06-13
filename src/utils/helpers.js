@@ -1,5 +1,5 @@
-function checkIsOver(str, num) {
-   return str.length > num;
+function checkIsOver(num, limit) {
+   return num > limit;
 }
 
 const MAX_CARD_CHARS = 240;

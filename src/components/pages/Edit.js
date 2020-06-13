@@ -16,6 +16,7 @@ export default class Edit extends React.Component {
       this.state = {
          answerText: memoryCard.answer,
          imageryText: memoryCard.imagery,
+         hasDeleteButton: false, // stores whether delete button is shown
       };
    }
 
@@ -42,6 +43,10 @@ export default class Edit extends React.Component {
    setAnswerText(e) {
       this.setState({ answerText: e.target.value }); // sets the state to match the user input (value of the event)
       // console.log(e.target, e.target.value);
+   }
+
+   toggleHasDeleteButton(e) {
+      this.setState({ hasDeleteButton: !this.state.hasDeleteButton });
    }
 
    render() {
@@ -157,6 +162,10 @@ export default class Edit extends React.Component {
                   type="checkbox"
                   className="custom-control-input"
                   id="show-delete"
+                  checked={this.state.hasDeleteButton}
+                  onChange={(e) => {
+                     this.toggleHasDeleteButton(e);
+                  }}
                />
                <label className="custom-control-label" htmlFor="show-delete">
                   Show delete button
@@ -164,13 +173,16 @@ export default class Edit extends React.Component {
             </div>
 
             {/* <!-- delete this card button --> */}
-            <div className="row mb-4" id="delete-button">
-               <div className="col">
-                  <Link className="btn btn-outline-danger" to="/all-cards">
-                     Delete this card
-                  </Link>
+            {this.state.hasDeleteButton && (
+               <div className="row mb-4" id="delete-button">
+                  <div className="col">
+                     <Link className="btn btn-outline-danger" to="/all-cards">
+                        Delete this card
+                     </Link>
+                  </div>
                </div>
-            </div>
+            )}
+
             <div className="custom-control custom-switch">
                <input
                   type="checkbox"

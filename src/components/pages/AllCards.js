@@ -8,15 +8,33 @@ import orderBy from "lodash/orderBy";
 export default class AllCards extends React.Component {
    constructor(props) {
       super(props);
-      // const defaultOrder = '[["createdAt"], ["asc"]]';
       this.state = {
          order: '[["createdAt"], ["desc"]]',
-         // order: [['createdAt'], ['desc']],
-         memoryCards: orderBy(memoryCards, ["createdAt"], ["desc"]),
+         displayedMemoryCards: orderBy(memoryCards, ["createdAt"], ["desc"]),
+         allMemoryCards: orderBy(memoryCards, ["createdAt"], ["desc"]),
       };
    }
 
-   filterByInput(e) {}
+   filterByInput() {
+      const input = document.getElementById("search-input").value;
+      const lowerCasedInput = input.toLowerCase();
+      console.log("filter input", lowerCasedInput);
+      const copyOfAllMemoryCards = [...this.state.allMemoryCards];
+      const filteredMemoryCards = copyOfAllMemoryCards.filter((memoryCard) => {
+         // filter all cards that include input in either the answer or imagery
+         if (
+            memoryCard.imagery.toLowerCase().includes(lowerCasedInput) ||
+            memoryCard.answer.toLowerCase().includes(lowerCasedInput)
+         ) {
+            return true;
+         }
+         return false;
+      });
+
+      this.setState({ displayedMemoryCards: filteredMemoryCards }, () =>
+         this.setMemoryCards()
+      );
+   }
 
    setOrder(e) {
       const newOrder = e.target.value;
@@ -24,15 +42,16 @@ export default class AllCards extends React.Component {
       this.setState({ order: newOrder }, () => this.setMemoryCards()); // this will call the fucntion after setting the state, ()=> this syntax is necessary
    }
 
+   // this looks at the order and reorders the memory cards
    setMemoryCards() {
       console.log("Setting memory cards");
-      const copyOfMemoryCards = [...this.state.memoryCards];
+      const copyOfDisplayedMemoryCards = [...this.state.displayedMemoryCards];
       console.log("this.state.order", this.state.order);
       const toJson = JSON.parse(this.state.order);
       console.log("...toJson", toJson);
-      const orderedMemoryCards = orderBy(copyOfMemoryCards, ...toJson);
+      const orderedMemoryCards = orderBy(copyOfDisplayedMemoryCards, ...toJson);
       console.log("orderedMemoryCards", orderedMemoryCards);
-      this.setState({ memoryCards: orderedMemoryCards });
+      this.setState({ displayedMemoryCards: orderedMemoryCards });
    }
 
    // // changes the order of the memory cards
@@ -54,13 +73,14 @@ export default class AllCards extends React.Component {
                <div className="form-group col-8">
                   <input
                      className="form-control"
-                     id="search-for"
+                     id="search-input"
                      placeholder="Search for a word"
                   />
                </div>
                <div className="col-4">
                   <button
                      className="btn btn-primary btn-block btn-sm"
+                     onClick={() => this.filterByInput()}
                      id="search-button"
                      type="button"
                   >
@@ -98,7 +118,7 @@ export default class AllCards extends React.Component {
                </div>
             </form>
 
-            {this.state.memoryCards.map((memoryCard) => {
+            {this.state.displayedMemoryCards.map((memoryCard) => {
                return (
                   <MemoryCard
                      answer={memoryCard.answer}

@@ -1,10 +1,11 @@
 import React from "react";
-// import { Link } from "react-router-dom"; // a React element for linking
 import classnames from "classnames";
 import hash from "object-hash";
 import { v4 as getUuid } from "uuid";
+import { withRouter } from "react-router-dom"; // a React element for linking
+import { EMAIL_REGEX } from "../../utils/helpers";
 
-export default class LogIn extends React.Component {
+class LogIn extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
@@ -19,15 +20,12 @@ export default class LogIn extends React.Component {
    async setEmailState(emailInput) {
       const lowerCasedEmailInput = emailInput.toLowerCase();
 
-      // eslint-disable-next-line
-      const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
       if (emailInput === "")
          this.setState({
             emailError: "Please enter your email address.",
             hasEmailError: true,
          });
-      else if (!emailRegex.test(lowerCasedEmailInput)) {
+      else if (!EMAIL_REGEX.test(lowerCasedEmailInput)) {
          this.setState({
             emailError: "Please enter a valid email address.",
             hasEmailError: true,
@@ -55,6 +53,9 @@ export default class LogIn extends React.Component {
             createdAt: Date.now(),
          };
          console.log(user);
+
+         // redirect the user
+         this.props.history.push("/create-answer");
       }
    }
 
@@ -114,7 +115,6 @@ export default class LogIn extends React.Component {
                      )}
                   </div>
                   <button
-                     to="/create-answer"
                      className="btn btn-success w-100"
                      id="user-button"
                      type="button"
@@ -128,3 +128,5 @@ export default class LogIn extends React.Component {
       );
    }
 }
+
+export default withRouter(LogIn); // this is required for the redirect to work

@@ -8,39 +8,43 @@ import orderBy from "lodash/orderBy";
 export default class AllCards extends React.Component {
    constructor(props) {
       super(props);
+      // const defaultOrder = '[["createdAt"], ["asc"]]';
       this.state = {
-         order: '["createdAt"], ["desc"]',
+         order: '[["createdAt"], ["desc"]]',
          // order: [['createdAt'], ['desc']],
          memoryCards: orderBy(memoryCards, ["createdAt"], ["desc"]),
       };
-
-      /*
-
-      EASY
-      orderBy([totalSuccessfulAttempts, createdAt], [desc, desc])
-
-      HARD
-      orderBy([totalSuccessfulAttempts, createdAt], [asc, asc])
-
-      MOST RECENT
-      orderBy([createdAt], [desc])
-
-      OLDEST
-      orderBy([createdAt], [asc])
-
-      */
    }
 
-   // changes the order of the memory cards
-   setMemoryCardsOrder(e) {
-      console.log("You've made a change.");
+   filterByInput(e) {}
+
+   setOrder(e) {
       const newOrder = e.target.value;
       console.log(newOrder);
-      const copyOfMemoryCards = [...this.state.memoryCards];
-      const toJson = JSON.parse(newOrder);
-      const orderedMemoryCards = orderBy(copyOfMemoryCards, ...toJson);
-      this.setState({ order: newOrder, memoryCards: orderedMemoryCards });
+      this.setState({ order: newOrder }, () => this.setMemoryCards()); // this will call the fucntion after setting the state, ()=> this syntax is necessary
    }
+
+   setMemoryCards() {
+      console.log("Setting memory cards");
+      const copyOfMemoryCards = [...this.state.memoryCards];
+      console.log("this.state.order", this.state.order);
+      const toJson = JSON.parse(this.state.order);
+      console.log("...toJson", toJson);
+      const orderedMemoryCards = orderBy(copyOfMemoryCards, ...toJson);
+      console.log("orderedMemoryCards", orderedMemoryCards);
+      this.setState({ memoryCards: orderedMemoryCards });
+   }
+
+   // // changes the order of the memory cards
+   // setMemoryCardsOrder(e) {
+   //    console.log("You've made a change.");
+   //    const newOrder = e.target.value;
+   //    console.log(newOrder);
+   //    const copyOfMemoryCards = [...this.state.memoryCards];
+   //    const toJson = JSON.parse(newOrder);
+   //    const orderedMemoryCards = orderBy(copyOfMemoryCards, ...toJson);
+   //    this.setState({ order: newOrder, memoryCards: orderedMemoryCards });
+   // }
 
    render() {
       return (
@@ -77,7 +81,7 @@ export default class AllCards extends React.Component {
                         value={this.state.order}
                         className="float-right btn dropdown-toggle btn-block"
                         style={{ height: "36px" }}
-                        onChange={(e) => this.setMemoryCardsOrder(e)}
+                        onChange={(e) => this.setOrder(e)}
                      >
                         <option value='[["createdAt"], ["desc"]]'>
                            Most recent

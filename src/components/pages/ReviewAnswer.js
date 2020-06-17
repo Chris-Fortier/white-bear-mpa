@@ -7,10 +7,15 @@ import actions from "../../store/actions";
 
 class ReviewAnswer extends React.Component {
    goToNextCard() {
-      // TODO: if index of current card = length fo the array of all the cards, we've gone to the end of the arry
-      // then show out of cards component
-      this.props.dispatch({ type: actions.UPDATE_INDEX_OF_CURRENT_CARD });
-      this.props.history.push("/review-imagery"); // goes to review imagery of next card
+      if (this.props.queue.index === this.props.queue.cards.length - 1) {
+         // if its the last card, go to out of cards and reset the queue
+         console.log("We are out of cards");
+         this.props.dispatch({ type: actions.RESET_QUEUE }); // reset the queue
+         this.props.history.push("/review-empty"); // goes to out of cards view
+      } else {
+         this.props.dispatch({ type: actions.UPDATE_INDEX_OF_CURRENT_CARD });
+         this.props.history.push("/review-imagery"); // goes to review imagery of next card
+      }
    }
 
    render() {

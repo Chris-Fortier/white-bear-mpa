@@ -11,31 +11,37 @@ import actions from "../../store/actions";
 class ReviewImagery extends React.Component {
    constructor(props) {
       super(props);
-      axios
-         .get(
-            "https://raw.githubusercontent.com/Chris-Fortier/white-bear-mpa/master/src/mock-data/memory-cards.json"
-         )
-         .then(function (res) {
-            // handle success
-            // res is shorthand for response
-            console.log(res);
-            props.dispatch({
-               type: actions.STORE_QUEUED_CARDS,
-               payload: res.data,
-            }); // dispatching an action
-            // res.data is the data from the response
-         })
-         .catch(function (error) {
-            // handle error
-            console.log(error);
-         });
-      // mocky "https://run.mocky.io/v3/830919fe-14ee-4918-ba47-fb8d7d0243d3"
-      // delete url https://designer.mocky.io/manage/delete/830919fe-14ee-4918-ba47-fb8d7d0243d3/Sg97iH72WMbqEXbJbyUkBezCO20fYpm85qWY
+
+      // if there are no cards, get the cards
+      if (props.queue.cards.length === 0) {
+         console.log("Empty arr of queue cards");
+         axios
+            .get(
+               "https://raw.githubusercontent.com/punchcode-fullstack/white-bear-mpa/localstates/src/mock-data/memory-cards.json"
+            )
+            .then(function (res) {
+               // handle success
+               // res is shorthand for response
+               console.log(res);
+               props.dispatch({
+                  type: actions.STORE_QUEUED_CARDS,
+                  payload: res.data,
+               }); // dispatching an action
+               // res.data is the data from the response
+            })
+            .catch(function (error) {
+               // handle error
+               console.log(error);
+            });
+         // mocky "https://run.mocky.io/v3/830919fe-14ee-4918-ba47-fb8d7d0243d3"
+         // delete url https://designer.mocky.io/manage/delete/830919fe-14ee-4918-ba47-fb8d7d0243d3/Sg97iH72WMbqEXbJbyUkBezCO20fYpm85qWY
+         // git data: https://raw.githubusercontent.com/Chris-Fortier/white-bear-mpa/master/src/mock-data/memory-cards.json
+      }
    }
 
    render() {
       const memoryCard = this.props.queue.cards[this.props.queue.index]; // gets the current card
-      console.log({ memoryCard });
+      // console.log({ memoryCard });
       return (
          <AppTemplate>
             <div className="mb-5">

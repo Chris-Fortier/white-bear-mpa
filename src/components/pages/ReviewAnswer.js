@@ -14,7 +14,7 @@ class ReviewAnswer extends React.Component {
    }
 
    render() {
-      const memoryCard = this.props.queuedCards[this.props.indexOfCurrentCard]; // gets the current card
+      const memoryCard = this.props.queue.cards[this.props.queue.index]; // gets the current card
       return (
          <AppTemplate>
             {/* <!-- Header ends here --> */}
@@ -83,8 +83,7 @@ class ReviewAnswer extends React.Component {
 // maps the store to props
 function mapStateToProps(state) {
    return {
-      queuedCards: state.queuedCards,
-      indexOfCurrentCard: state.indexOfCurrentCard,
+      queue: state.queue,
    };
 }
 

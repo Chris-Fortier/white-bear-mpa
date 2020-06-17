@@ -1,0 +1,21 @@
+import actions from "../actions";
+
+export default function queue(queue = {}, action) {
+   // default for state is an empty array
+
+   // action has two things in it: action.payload and action.type
+
+   let newQueue = { ...queue }; // make a copy of it as we cannot change the original one in place
+
+   switch (action.type) {
+      case actions.STORE_QUEUED_CARDS:
+         console.log("FIRED STORE_QUEUED_CARDS");
+         newQueue.cards = action.payload;
+         return newQueue; // [{},{}]
+      case actions.UPDATE_INDEX_OF_CURRENT_CARD:
+         newQueue.index += 1;
+         return newQueue;
+      default:
+         return queue;
+   }
+}

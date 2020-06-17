@@ -10,10 +10,11 @@ class ReviewAnswer extends React.Component {
       if (this.props.queue.index === this.props.queue.cards.length - 1) {
          // if its the last card, go to out of cards and reset the queue
          console.log("We are out of cards");
-         this.props.dispatch({ type: actions.RESET_QUEUE }); // reset the queue
+         this.props.dispatch({ type: actions.INCREMENT_QUEUE_INDEX });
+         // this.props.dispatch({ type: actions.RESET_QUEUE }); // reset the queue
          this.props.history.push("/review-empty"); // goes to out of cards view
       } else {
-         this.props.dispatch({ type: actions.UPDATE_INDEX_OF_CURRENT_CARD });
+         this.props.dispatch({ type: actions.INCREMENT_QUEUE_INDEX });
          this.props.history.push("/review-imagery"); // goes to review imagery of next card
       }
    }

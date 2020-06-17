@@ -6,7 +6,7 @@ export default function indexOfCurrentCard(state = 0, action) {
    // action has two things in it: action.payload and action.type
 
    switch (action.type) {
-      case actions.UPDATE_INDEX_OF_CURRENT_CARD:
+      case actions.INCREMENT_QUEUE_INDEX:
          return state + 1; // goes to the next card
       default:
          return state;

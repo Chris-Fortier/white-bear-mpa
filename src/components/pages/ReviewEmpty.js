@@ -1,31 +1,63 @@
 import React from "react";
 import AppTemplate from "../ui/AppTemplate";
-import { Link } from "react-router-dom"; // a React element for linking
+import { connect } from "react-redux";
+import actions from "../../store/actions";
 
-export default function ReviewEmpty() {
-   return (
-      <AppTemplate>
-         <h4>Out of cards</h4>
+class ReviewEmpty extends React.Component {
+   // go to previous card
+   goToPrevCard() {
+      this.props.dispatch({ type: actions.DECREMENT_QUEUE_INDEX });
+      this.props.history.push("/review-answer");
+   }
 
-         {/* <!-- button row --> */}
+   getMoreCards() {
+      this.props.dispatch({ type: actions.RESET_QUEUE });
+      this.props.history.push("/review-imagery");
+   }
 
-         <div className="row mb-4">
-            <div className="col">
-               <Link className="btn btn-link" to="/review-answer">
-                  Previous card
-               </Link>
-               <div className="float-right">
-                  <Link
-                     to="/review-imagery"
-                     className="btn btn-outline-primary btn-lg"
-                  >
-                     Get more cards
-                  </Link>
+   render() {
+      return (
+         <AppTemplate>
+            <h4>Out of cards</h4>
+
+            {/* <!-- button row --> */}
+
+            <div className="row mb-4">
+               <div className="col">
+                  {this.props.queue.index > 0 && (
+                     <button
+                        className="btn btn-link"
+                        onClick={() => {
+                           this.goToPrevCard();
+                        }}
+                     >
+                        Previous card
+                     </button>
+                  )}
+                  <div className="float-right">
+                     <button
+                        className="btn btn-outline-primary btn-lg"
+                        onClick={() => {
+                           this.getMoreCards();
+                        }}
+                     >
+                        Get more cards
+                     </button>
+                  </div>
                </div>
             </div>
-         </div>
 
-         {/* <!-- end button row -->          */}
-      </AppTemplate>
-   );
+            {/* <!-- end button row -->          */}
+         </AppTemplate>
+      );
+   }
 }
+
+// maps the store to props
+function mapStateToProps(state) {
+   return {
+      queue: state.queue,
+   };
+}
+
+export default connect(mapStateToProps)(ReviewEmpty); // this is "currying"

@@ -12,8 +12,11 @@ export default function queue(queue = {}, action) {
          console.log("FIRED STORE_QUEUED_CARDS");
          newQueue.cards = action.payload;
          return newQueue; // [{},{}]
-      case actions.UPDATE_INDEX_OF_CURRENT_CARD:
+      case actions.INCREMENT_QUEUE_INDEX:
          newQueue.index += 1;
+         return newQueue;
+      case actions.DECREMENT_QUEUE_INDEX:
+         newQueue.index -= 1;
          return newQueue;
       case actions.RESET_QUEUE:
          newQueue.cards = [];

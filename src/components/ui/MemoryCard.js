@@ -1,6 +1,5 @@
 import React from "react";
-import editIcon from "../../icons/edit.svg"; // thumbs up icon
-import { Link } from "react-router-dom"; // a React element for linking
+import EditButton from "./EditButton";
 
 export default function MemoryCard(props) {
    return (
@@ -14,18 +13,7 @@ export default function MemoryCard(props) {
             </div>
          </div>
          <div className="col-3 col-sm-2">
-            <Link className="btn btn-link float-right" to="/edit">
-               <img
-                  src={editIcon}
-                  width="20px"
-                  style={{
-                     marginBottom: "5px",
-                     marginRight: "8px",
-                  }}
-                  alt=""
-               />
-               Edit
-            </Link>
+            <EditButton cssClasses="btn btn-link float right" hasIcon={true} />
          </div>
       </div>
    );

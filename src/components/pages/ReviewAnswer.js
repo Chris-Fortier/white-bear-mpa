@@ -1,9 +1,9 @@
 import React from "react";
 import thumbsUpIcon from "../../icons/thumbs-up.svg"; // thumbs up icon
 import AppTemplate from "../ui/AppTemplate";
-import { Link } from "react-router-dom"; // a React element for linking
 import { connect } from "react-redux";
 import actions from "../../store/actions";
+import EditButton from "../ui/EditButton";
 
 class ReviewAnswer extends React.Component {
    goToNextCard() {
@@ -42,9 +42,7 @@ class ReviewAnswer extends React.Component {
 
             <div className="row mb-4">
                <div className="col">
-                  <Link className="btn btn-link" to="/edit">
-                     Edit
-                  </Link>
+                  <EditButton cssClasses="btn btn-link" hasIcon={false} />
                   <div className="float-right">
                      <button
                         className="btn btn-outline-primary mr-4"

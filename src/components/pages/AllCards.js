@@ -1,18 +1,47 @@
 import React from "react";
 import AppTemplate from "../ui/AppTemplate";
 import MemoryCard from "../ui/MemoryCard";
-import memoryCards from "../../mock-data/memory-cards";
+// import memoryCards from "../../mock-data/memory-cards";
 import orderBy from "lodash/orderBy";
-// const memoryCard = memoryCards[2];
+import axios from "axios";
 
 export default class AllCards extends React.Component {
    constructor(props) {
       super(props);
+
       this.state = {
          order: '[["createdAt"], ["desc"]]',
-         displayedMemoryCards: orderBy(memoryCards, ["createdAt"], ["desc"]),
-         allMemoryCards: orderBy(memoryCards, ["createdAt"], ["desc"]),
+         displayedMemoryCards: [],
+         allMemoryCards: [],
       };
+   }
+
+   // this is a "lifecycle" method like render(), we don't need to call it manually
+   componentDidMount() {
+      axios
+         .get(
+            "https://raw.githubusercontent.com/punchcode-fullstack/white-bear-mpa/localstates/src/mock-data/memory-cards.json"
+         )
+         .then((res) => {
+            // handle success
+            // res is shorthand for response
+            // changed to an ES6 arrow function so we can use "this" inside of it
+            // they maintian the this from above and don't override it
+            console.log(res.data);
+            const memoryCards = res.data;
+            this.setState({
+               displayedMemoryCards: orderBy(
+                  memoryCards,
+                  ["createdAt"],
+                  ["desc"]
+               ),
+               allMemoryCards: orderBy(memoryCards, ["createdAt"], ["desc"]),
+            });
+         })
+         .catch((error) => {
+            // handle error
+            console.log(error);
+         });
    }
 
    filterByInput() {

@@ -19,7 +19,7 @@ class ReviewImagery extends React.Component {
             .get(
                "https://raw.githubusercontent.com/punchcode-fullstack/white-bear-mpa/localstates/src/mock-data/memory-cards.json"
             )
-            .then(function (res) {
+            .then((res) => {
                // handle success
                // res is shorthand for response
                console.log(res);
@@ -29,7 +29,7 @@ class ReviewImagery extends React.Component {
                }); // dispatching an action
                // res.data is the data from the response
             })
-            .catch(function (error) {
+            .catch((error) => {
                // handle error
                console.log(error);
             });

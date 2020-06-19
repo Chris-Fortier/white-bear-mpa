@@ -4,6 +4,7 @@ import hash from "object-hash";
 import { v4 as getUuid } from "uuid";
 import { withRouter } from "react-router-dom"; // a React element for linking
 import { EMAIL_REGEX } from "../../utils/helpers";
+import axios from "axios";
 
 class LogIn extends React.Component {
    constructor(props) {
@@ -14,6 +15,21 @@ class LogIn extends React.Component {
          hasEmailError: false,
          hasPasswordError: false,
       };
+   }
+
+   // this is a "lifecycle" method like render(), we don't need to call it manually
+   componentDidMount() {
+      axios
+         .get(
+            "https://raw.githubusercontent.com/punchcode-fullstack/white-bear-mpa/localstates/src/mock-data/memory-cards.json"
+         )
+         .then((res) => {
+            const currentUser = res.data;
+            console.log(currentUser);
+         })
+         .catch((error) => {
+            console.log(error);
+         });
    }
 
    // tests if the email is valid

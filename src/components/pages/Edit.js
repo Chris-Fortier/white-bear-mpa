@@ -53,6 +53,17 @@ class Edit extends React.Component {
       this.setState({ hasDeleteButton: !this.state.hasDeleteButton });
    }
 
+   deleteCard() {
+      // TODO: delete from database
+      console.log("deleting card");
+      if (this.props.editableCard.prevRoute === "/review-answer") {
+         this.deleteCardFromStore();
+      }
+      if (this.props.editableCard.prevRoute === "/all-cards") {
+         this.props.history.push("/all-cards");
+      }
+   }
+
    deleteCardFromStore() {
       console.log("deleteCardFromStore()...");
       const deletedCard = this.props.editableCard.card;
@@ -225,7 +236,7 @@ class Edit extends React.Component {
                               to={this.changeRoute(
                                  this.props.editableCard.prevRoute
                               )}
-                              onClick={() => this.deleteCardFromStore()}
+                              onClick={() => this.deleteCard()}
                            >
                               Delete this card
                            </Link>

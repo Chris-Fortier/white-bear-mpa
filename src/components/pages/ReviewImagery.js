@@ -37,6 +37,11 @@ class ReviewImagery extends React.Component {
          // delete url https://designer.mocky.io/manage/delete/830919fe-14ee-4918-ba47-fb8d7d0243d3/Sg97iH72WMbqEXbJbyUkBezCO20fYpm85qWY
          // git data: https://raw.githubusercontent.com/Chris-Fortier/white-bear-mpa/master/src/mock-data/memory-cards.json
       }
+
+      // if the card index is greater than the amount of cards, go to out of cards page
+      if (props.queue.index >= props.queue.cards.length) {
+         this.props.history.push("/review-empty");
+      }
    }
 
    // go to previous card

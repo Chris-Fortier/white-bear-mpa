@@ -3,9 +3,24 @@ import thumbsUpIcon from "../../icons/thumbs-up.svg"; // thumbs up icon
 import AppTemplate from "../ui/AppTemplate";
 import { connect } from "react-redux";
 import actions from "../../store/actions";
-import EditButton from "../ui/EditButton";
+// import EditButton from "../ui/EditButton";
+import { Link } from "react-router-dom"; // a React element for linking
 
 class ReviewAnswer extends React.Component {
+   constructor(props) {
+      super(props);
+      // if we get to this page and have no cards, go to out of cards page
+      // or if the index is greater than cards.length-1?
+      // if (this.props.queue.cards.length === 0) {
+      //    this.props.history.push("/review-empty");
+      // }
+
+      // if the card index is greater than the amount of cards, go to out of cards page
+      if (props.queue.index >= props.queue.cards.length) {
+         this.props.history.push("/review-empty");
+      }
+   }
+
    goToNextCard() {
       if (this.props.queue.index === this.props.queue.cards.length - 1) {
          // if its the last card, go to out of cards and reset the queue
@@ -17,6 +32,18 @@ class ReviewAnswer extends React.Component {
          this.props.dispatch({ type: actions.INCREMENT_QUEUE_INDEX });
          this.props.history.push("/review-imagery"); // goes to review imagery of next card
       }
+   }
+
+   storeEditableCard() {
+      console.log("STORING EDITABLE CARD");
+      const memoryCard = this.props.queue.cards[this.props.queue.index]; // gets the current card
+      this.props.dispatch({
+         type: actions.STORE_EDITABLE_CARD,
+         payload: {
+            card: memoryCard,
+            prevRoute: "/review-answer",
+         },
+      });
    }
 
    render() {
@@ -42,7 +69,22 @@ class ReviewAnswer extends React.Component {
 
             <div className="row mb-4">
                <div className="col">
-                  <EditButton cssClasses="btn btn-link" hasIcon={false} />
+                  {/* <EditButton
+                     cssClasses="btn btn-link"
+                     onClick={() => {
+                        this.storeEditableCard();
+                     }}
+                     hasIcon={false}
+                  /> */}
+                  <Link
+                     to="/edit"
+                     className="btn btn-link"
+                     onClick={() => {
+                        this.storeEditableCard();
+                     }}
+                  >
+                     Edit
+                  </Link>
                   <div className="float-right">
                      <button
                         className="btn btn-outline-primary mr-4"

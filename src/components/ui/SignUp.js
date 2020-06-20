@@ -4,6 +4,9 @@ import hash from "object-hash";
 import { v4 as getUuid } from "uuid";
 import { withRouter } from "react-router-dom"; // a React element for linking
 import { EMAIL_REGEX } from "../../utils/helpers";
+import axios from "axios";
+import actions from "../../store/actions";
+import { connect } from "react-redux";
 
 class SignUp extends React.Component {
    constructor(props) {
@@ -56,7 +59,7 @@ class SignUp extends React.Component {
 
    // checks if the password is valid
    async setPasswordState(passwordInput, emailInput) {
-      console.log(passwordInput);
+      console.log("setPasswordState()...");
 
       const uniqChars = [...new Set(passwordInput)];
       console.log("uniqChars", uniqChars);
@@ -93,8 +96,10 @@ class SignUp extends React.Component {
 
    // tests if the email and password are valid and if so creates the user
    async validateAndCreateUser() {
-      const emailInput = document.getElementById("email-input").value;
-      const passwordInput = document.getElementById("password-input").value;
+      const emailInput = document.getElementById("singup-email-input").value;
+      const passwordInput = document.getElementById("singup-password-input")
+         .value;
+      console.log(emailInput, passwordInput);
 
       // await is used on these to make sure we get the states of these before the if statement
       await this.setEmailState(emailInput);
@@ -107,11 +112,27 @@ class SignUp extends React.Component {
             password: hash(passwordInput),
             createdAt: Date.now(),
          };
-         console.log(user);
-      }
+         console.log("created user object for POST: ", user);
 
-      // redirect the user
-      this.props.history.push("/create-answer");
+         // Mimic API response:
+         axios
+            .get(
+               "https://raw.githubusercontent.com/Chris-Fortier/white-bear-mpa/master/src/mock-data/user.json"
+            )
+            .then((res) => {
+               const currentUser = res.data;
+               console.log(currentUser);
+               this.props.dispatch({
+                  type: actions.UPDATE_CURRENT_USER,
+                  payload: res.data,
+               });
+            })
+            .catch((error) => {
+               console.log(error);
+            });
+         // redirect the user
+         this.props.history.push("/create-answer");
+      }
    }
 
    // renders the signup faceplate
@@ -138,7 +159,7 @@ class SignUp extends React.Component {
                               "form-control": true,
                               "is-invalid": this.state.hasEmailError,
                            })}
-                           id="email-input"
+                           id="singup-email-input"
                            required
                         />
                         {this.state.hasEmailError && (
@@ -157,7 +178,7 @@ class SignUp extends React.Component {
                               "form-control": true,
                               "is-invalid": this.state.hasPasswordError,
                            })}
-                           id="password-input"
+                           id="singup-password-input"
                            required
                         />
                         {this.state.hasPasswordError && (
@@ -167,7 +188,7 @@ class SignUp extends React.Component {
                         )}
                      </div>
                      <button
-                        to="/create-answer"
+                        // to="/create-answer"
                         className="btn btn-success w-100"
                         id="user-button"
                         type="button"
@@ -194,4 +215,9 @@ class SignUp extends React.Component {
    }
 }
 
-export default withRouter(SignUp); // this is required for the redirect to work
+// maps the store to props
+function mapStateToProps(state) {
+   return {};
+}
+
+export default withRouter(connect(mapStateToProps)(SignUp)); // this is "currying"
